@@ -2,11 +2,13 @@ package com.encartoon.encartoon;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -27,7 +29,13 @@ public class GridViewAdapter extends BaseAdapter {
     }
     @Override
     public int getCount() {
-        return 7;
+        int count = 0;
+        try {
+            count = data.getJSONArray("data").length();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
     }
     @Override
     public Object getItem(int position) {
@@ -49,7 +57,12 @@ public class GridViewAdapter extends BaseAdapter {
             TextView textView = convertView.findViewById(R.id.txt_item);
             textView.setText(item.getString("name"));
             ImageView imageView = convertView.findViewById(R.id.img_item);
-            Picasso.with(mContext).load("http://www.en-cartoon.com/" + item.getString("cover")).into(imageView);
+            Picasso.with(mContext).load("http://api.en-cartoon.com/" + item.getString("cover")).into(imageView);
+            if (position == 0) {
+                LinearLayout item_box = convertView.findViewById(R.id.item_box);
+                item_box.setBackgroundColor(Color.parseColor("#ffffff"));
+                textView.setTextColor(Color.parseColor("#000000"));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

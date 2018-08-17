@@ -1,10 +1,13 @@
 package com.encartoon.encartoon;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class DetailGirdAdapter extends BaseAdapter {
@@ -36,6 +39,10 @@ public class DetailGirdAdapter extends BaseAdapter {
         textView.setTextSize(20);
         textView.setGravity(Gravity.CENTER);
         textView.setPadding(0,20,0,20);
+        textView.setTextColor(Color.parseColor("#eeeeee"));
+        if (position == 0) {
+            textView.setTextColor(Color.parseColor("#000000"));
+        }
         return  textView;
     }
 }
